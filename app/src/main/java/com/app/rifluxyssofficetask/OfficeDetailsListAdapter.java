@@ -56,7 +56,7 @@ public class OfficeDetailsListAdapter extends RecyclerView.Adapter<OfficeDetails
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         /*initialization of Adapter Databinding in Model View Viewmodel*/
         AdapterOfficefulldetailsBinding adapterOfficefulldetailsBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.adapter_officefulldetails, parent, false);
-        return new MyViewHolder(adapterOfficefulldetailsBinding,mOnOfficeDetailsListener);
+        return new MyViewHolder(adapterOfficefulldetailsBinding);
     }
 
     @Override
@@ -81,6 +81,9 @@ public class OfficeDetailsListAdapter extends RecyclerView.Adapter<OfficeDetails
 
         }
 
+        /*view Model class initalize*/
+        holder.mAdapterOfficefulldetailsBinding.setOfficeAdapterViewModels(new OfficeAdapterViewModels(holder.mAdapterOfficefulldetailsBinding, position, mOnOfficeDetailsListener));
+
     }
 
     @Override
@@ -100,15 +103,11 @@ public class OfficeDetailsListAdapter extends RecyclerView.Adapter<OfficeDetails
          * Instantiates a new My view holder.
          *
          * @param officefulldetailsBinding the officefulldetails binding
-         * @param mOnOfficeDetailsListener
          */
-        public MyViewHolder(@NonNull AdapterOfficefulldetailsBinding officefulldetailsBinding, OnOfficeDetailsListener mOnOfficeDetailsListener) {
+        public MyViewHolder(@NonNull AdapterOfficefulldetailsBinding officefulldetailsBinding) {
             super(officefulldetailsBinding.getRoot());
 
             this.mAdapterOfficefulldetailsBinding = officefulldetailsBinding;
-            /*view Model class initalize*/
-            mAdapterOfficefulldetailsBinding.setOfficeAdapterViewModels(new OfficeAdapterViewModels(mAdapterOfficefulldetailsBinding, getAdapterPosition(), mOnOfficeDetailsListener));
-
         }
 
     }
