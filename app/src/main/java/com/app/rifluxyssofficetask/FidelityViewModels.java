@@ -1,28 +1,24 @@
 package com.app.rifluxyssofficetask;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.BaseObservable;
 
 import com.app.rifluxyssofficetask.databinding.ActivityFidelitynationalBinding;
-import com.app.rifluxyssofficetask.databinding.AdapterOfficefulldetailsBinding;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.Gson;
 
 import java.util.List;
 import java.util.Objects;
@@ -193,10 +189,14 @@ public class FidelityViewModels extends BaseObservable implements OnMapReadyCall
                 /* checking the OfficeFacebook not Null && OfficeFacebook not empty checking */
                 if (officeDetailsPojoList.get(adapterPosition).getOfficeFacebook() != null && !officeDetailsPojoList.get(adapterPosition).getOfficeFacebook().equals("-")) {
 
-                    /*Intent of the Facebook Profile Page redirect */
-                    Intent intentFacebook = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/" + officeDetailsPojoList.get(adapterPosition).getOfficeFacebook().replace(" ", "").trim() + "/"));
-                    /*package manager resolveActivity not null checking in this line */
-                    if (intentFacebook.resolveActivity(mFidelityNationalActivity.getPackageManager()) != null) { mFidelityNationalActivity.startActivity(intentFacebook); }
+                    try {
+                        /*Intent of the Facebook Profile Page redirect */
+                        Intent intentFacebook = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/n/?" + officeDetailsPojoList.get(adapterPosition).getOfficeFacebook().replace(" ", "").trim() + "/"));
+                        /*package manager resolveActivity not null checking in this line */
+                        mFidelityNationalActivity.startActivity(intentFacebook);
+                    } catch (ActivityNotFoundException activityNotFoundException) {
+                        activityNotFoundException.printStackTrace();
+                    }
 
                 }
                 break;
