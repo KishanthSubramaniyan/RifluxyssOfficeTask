@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Rifluxyss Office Task</string>
+    <string name="todo">TODO</string>
+    <string name="fidelity_national_title">Fidelity National Title</string>
+    <string name="offices">Offices</string>
+    <string name="directions">Directions</string>
+    <string name="call">Call</string>
+    <string name="email">Email</string>
+    <string name="website">Website</string>
+    <string name="facebook">Facebook</string>
+    <string name="m">m</string>
+</resources>
